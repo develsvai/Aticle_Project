@@ -52,30 +52,28 @@ public class ArticlesController {
     }
 
     //현재 까지 생성한 아티클 전부 불러오기
+
     @GetMapping("/articles")
     public String index(Model model) {
         List<Article> articleEntityList = articleRepository.findAll();
 
         model.addAttribute("articleList", articleEntityList);
 
-        return  "articles/index";
+        return "articles/index";
     }
-
     //db 데이터 수정
+
     @GetMapping("/articles/{id}/edit")
-    public String Edit(@PathVariable Long id , Model model) {
+    public String Edie(@PathVariable Long id , Model model){
         log.info("id ="+id);
 
         Article articledata = articleRepository.findById(id).orElse(null);
-
-
         model.addAttribute("article", articledata);
-
 
         return "articles/edit";
     }
-
     //db 데이터 업데이트
+
     @PostMapping("/articles/update")
     public String update(ArticlesForm form){
         log.info(form.toString());
@@ -89,14 +87,17 @@ public class ArticlesController {
 
     //db 데이터 삭제
     @GetMapping("/articles/{id}/delete")
-    public String delete(@PathVariable Long id, RedirectAttributes rttr){
+    public String delete(@PathVariable Long id, RedirectAttributes rttr) {
         Article Target = articleRepository.findById(id).orElse(null);
 
-        if(Target != null) {
+        if (Target != null) {
             articleRepository.delete(Target);
             rttr.addFlashAttribute("msg", "삭제 완료");
         }
         return "redirect:/articles";
     }
 
+
 }
+
+
