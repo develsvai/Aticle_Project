@@ -64,7 +64,7 @@ public class ArticlesController {
     //db 데이터 수정
 
     @GetMapping("/articles/{id}/edit")
-    public String Edie(@PathVariable Long id , Model model){
+    public String Edit(@PathVariable Long id , Model model){
         log.info("id ="+id);
 
         Article articledata = articleRepository.findById(id).orElse(null);
